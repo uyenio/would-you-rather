@@ -31,7 +31,7 @@ class NewQuestion extends Component {
 
         const { optionOneText, optionTwoText } = this.state
         const { dispatch, id } = this.props
-        dispatch(handleAddQuestion(optionOneText, optionTwoText, id))
+        dispatch(handleAddQuestion(optionOneText, optionTwoText))
 
         this.setState(() => ({
             optionOneText: '',
@@ -68,4 +68,10 @@ class NewQuestion extends Component {
     }
 }
 
-export default connect()(NewQuestion)
+function mapStateToProps ({authedUser}) {
+    return {
+        authedUser
+    }
+}
+
+export default connect(mapStateToProps)(NewQuestion)

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion, formatDate } from '../utils/helpers'
+import { formatQuestion } from '../utils/helpers'
 import { Link, withRouter } from 'react-router-dom'
 
 class Question extends Component {
@@ -35,7 +35,7 @@ function mapStateToProps({authedUser, users, questions}, {id}) {
 
     return {
         authedUser,
-        question: formatQuestion(question, users[question.author], authedUser)
+        question: formatQuestion(question, authedUser)
     }
 }
 
