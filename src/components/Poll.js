@@ -5,6 +5,7 @@ import TiTickOutline from 'react-icons/lib/ti/tick-outline'
 import TiTick from 'react-icons/lib/ti/tick'
 import User from './User'
 import { handleVote } from '../actions/shared'
+import PollStatistic from './PollStatistic';
 
 class Poll extends Component {
     state = {
@@ -56,29 +57,36 @@ class Poll extends Component {
             timestamp, optionOne, optionTwo, id, author
         } = question
 
-        return (
-            <div className='question'>
-                <User id={author}/>
-                Would you rather 
-                <div className='question-info'>
-                    <button className='tick-button' onClick={this.handleOptionOneVote}>
-                        {isOptionOneSelected === true 
-                            ? <TiTick color='#0xe11e' className='question-icon'/>
-                            : <TiTickOutline className='question-icon' />
-                        }
-                        {optionOne.text}
-                    </button>
-                    or
-                    <button className='tick-button' onClick={this.handleOptionTwoVote}>
-                        {isOptionTwoSelected === true 
-                            ? <TiTick color='#0xe11e' className='question-icon'/>
-                            : <TiTickOutline className='question-icon' />
-                        }
-                        {optionTwo.text}
-                    </button>
+        if (isOptionOneSelected === false && isOptionTwoSelected === false) {
+            return (
+                <div className='question'>
+                    <User id={author}/>
+                    Would you rather 
+                    <div className='question-info'>
+                        <button className='tick-button' onClick={this.handleOptionOneVote}>
+                            {isOptionOneSelected === true 
+                                ? <TiTick color='#0xe11e' className='question-icon'/>
+                                : <TiTickOutline className='question-icon' />
+                            }
+                            {optionOne.text}
+                        </button>
+                        or
+                        <button className='tick-button' onClick={this.handleOptionTwoVote}>
+                            {isOptionTwoSelected === true 
+                                ? <TiTick color='#0xe11e' className='question-icon'/>
+                                : <TiTickOutline className='question-icon' />
+                            }
+                            {optionTwo.text}
+                        </button>
+                    </div>
                 </div>
-            </div>
-        )
+            )
+        } else {
+            return (
+                <PollStatistic id={id}/>
+            )
+        }
+
     }
 }
 
