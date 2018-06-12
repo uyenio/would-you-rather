@@ -3,6 +3,16 @@ import { showLoading, hideLoading } from 'react-redux-loading'
 
 export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
 export const ADD_QUESTION = 'ADD_QUESTION'
+export const ADD_VOTE = 'ADD_VOTE'
+
+export  function addVote (info) {
+    return {
+      type: ADD_VOTE,
+      authedUser: info.authedUser,
+      qid: info.qid,
+      answer: info.answer
+    }
+  }
 
 function addQuestion (question) {
     return {
