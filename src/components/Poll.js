@@ -14,7 +14,11 @@ class Poll extends Component {
 
     handleOptionOneVote = (e) => {
         e.preventDefault();
-        this.state.isOptionOneSelected = true;
+        this.setState(() => ({
+            isOptionTwoSelected: false,
+            isOptionOneSelected: true
+          }))
+
         const { dispatch, question, authedUser } = this.props;
 
         dispatch(handleVote({
@@ -26,7 +30,11 @@ class Poll extends Component {
 
     handleOptionTwoVote = (e) => {
         e.preventDefault();
-        this.state.isOptionTwoSelected = true;
+        this.setState(() => ({
+            isOptionTwoSelected: true,
+            isOptionOneSelected: false
+          }))
+
         const { dispatch, question, authedUser } = this.props;
 
         dispatch(handleVote({
