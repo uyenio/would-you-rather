@@ -8,34 +8,46 @@ class Home extends Component {
     render() {
         return (
             <Tabs>
-            <TabList>
-              <Tab>Unanswered</Tab>
-              <Tab>Answered</Tab>
-            </TabList>
-         
-            <TabPanel>
-                <div>
-                    <ul className='home-list'> 
-                        {this.props.questionIds.map((id) => (
-                            <li key={id}>
-                                <Question id={id}/>
-                            </li>
-                        ))}
-                    </ul>
-                </div> 
-            </TabPanel>
-            <TabPanel>
-                Content 2
-            </TabPanel>
+                <TabList>
+                    <Tab>Unanswered</Tab>
+                    <Tab>Answered</Tab>
+                </TabList>
+            
+                <TabPanel>
+                    <div>
+                        <ul className='home-list'> 
+                            {this.props.unAnsweredQuestionIds.map((id) => (
+                                <li key={id}>
+                                    <Question id={id}/>
+                                </li>
+                            ))}
+                        </ul>
+                    </div> 
+                </TabPanel>
+                <TabPanel>
+                    <div>
+                        <ul className='home-list'> 
+                            {this.props.answeredQuestionIds.map((id) => (
+                                <li key={id}>
+                                    <Question id={id}/>
+                                </li>
+                            ))}
+                        </ul>
+                    </div> 
+                </TabPanel>
           </Tabs> 
         )
     }
 }
 
-function mapStateToProps ({questions}) {
+function mapStateToProps ({questions, users, authedUser}) {
+    var answeredQuestionIds = Object.keys(users[authedUser].answers);
+    var unAnsweredQuestionIds = Object.keys(questions).filter(q => !answeredQuestionIds.includes(q));
     return {
-        questionIds: Object.keys(questions)
-            .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
+        answeredQuestionIds: answeredQuestionIds
+                                .sort((a,b) => questions[b].timestamp - questions[a].timestamp),
+        unAnsweredQuestionIds: unAnsweredQuestionIds
+                                .sort((a,b) => questions[b].timestamp - questions[a].timestamp)
     }
 }
 
