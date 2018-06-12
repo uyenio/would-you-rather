@@ -1,23 +1,36 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { formatQuestion } from '../utils/helpers'
 import Poll from './Poll'
+import PollStatistic from './PollStatistic'
 
 class QuestionDetails extends Component {
     render() {
-        const { id } = this.props
-        return (
-            <div>
-                <Poll id={id} />
-            </div>
-        )
+        const { question, isAnswered } = this.props
+        
+        if (isAnswered) {
+            return (
+                <div>
+                    <PollStatistic id={question.id} />
+                </div>
+            )
+        } else {
+            return (
+                <div>
+                    <Poll id={question.id} />
+                </div>
+            )
+        }
     }
 }
 
-function mapStateToProps ({authedUser}, props) {
+function mapStateToProps({authedUser, questions, users}, props) {
     const { id } = props.match.params
-
+    const question = questions[id]
+    const answeredQuestions = Object.keys(users[authedUser].answers)
     return {
-        id
+        isAnswered: answeredQuestions.includes(id),
+        question: formatQuestion(question, authedUser)
     }
 }
 
