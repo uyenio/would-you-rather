@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helpers'
+import Nav from './Nav'
 
 class PollStatistic extends Component {
     render() {
@@ -16,17 +17,20 @@ class PollStatistic extends Component {
         var totalVotes = optionOne.votes.length + optionTwo.votes.length
         return (
             <div>
-                Would you rather 
+                <Nav />
                 <div>
-                    {optionOne.text}
-                    - Votes: {optionOne.votes.length}
-                    - Percentage: {Math.round((optionOne.votes.length / totalVotes) * 100)}%
-                </div>         
-                    or
-                <div>
-                    {optionTwo.text} 
-                    - Votes: {optionTwo.votes.length}
-                    - Percentage: {Math.round((optionTwo.votes.length / totalVotes) * 100)}%
+                    Would you rather 
+                    <div>
+                        {optionOne.text}
+                        - Votes: {optionOne.votes.length}
+                        - Percentage: {Math.round((optionOne.votes.length / totalVotes) * 100)}%
+                    </div>         
+                        or
+                    <div>
+                        {optionTwo.text} 
+                        - Votes: {optionTwo.votes.length}
+                        - Percentage: {Math.round((optionTwo.votes.length / totalVotes) * 100)}%
+                    </div>
                 </div>
             </div>
         )

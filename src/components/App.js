@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from '../actions/shared'
@@ -8,6 +8,9 @@ import NewQuestion from './NewQuestion'
 import Nav from './Nav'
 import QuestionDetails from './QuestionDetails'
 import Leaderboard from './Leaderboard'
+import Login from './Login'
+import getMuiTheme from "material-ui/styles/getMuiTheme";
+import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 class App extends Component {
   componentDidMount() {
@@ -15,24 +18,34 @@ class App extends Component {
   }
 
   render() {
+    const muiTheme = getMuiTheme({
+      appBar: {
+          color: "#37517E",
+          height: 50
+      },
+    });
+
     return (
-      <Router>
-        <Fragment>
-          <LoadingBar />
-          <div className='container'>
-            <Nav />
-            {this.props.loading === true 
-              ? null
-              : <div>
-                  <Route path='/' exact component={Home}/>
-                  <Route path='/questions/:id' component={QuestionDetails}/>
-                  <Route path='/add' component={NewQuestion} />
-                  <Route path='/leaderboard' component={Leaderboard} />
-                </div>
-            }
-          </div>
-        </Fragment>
-      </Router>
+      <MuiThemeProvider muiTheme={muiTheme}>
+        <Router>
+          <Fragment>
+            <LoadingBar />
+            <div className='container'>
+              {this.props.loading === true 
+                ? null
+                : <div>
+                    <Route path="/login" component={Login}/>
+                    <Route path='/home' component={Home}/>
+                    <Route path='/questions/:id' component={QuestionDetails}/>
+                    <Route path='/add' component={NewQuestion} />
+                    <Route path='/leaderboard' component={Leaderboard} />
+                    <Redirect from="/" to="/login"/>
+                  </div>
+              }
+            </div>
+          </Fragment>
+        </Router>
+      </MuiThemeProvider>
     )
   }
 }

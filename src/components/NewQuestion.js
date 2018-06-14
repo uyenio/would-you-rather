@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { handleAddQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
+import Nav from './Nav'
 
 class NewQuestion extends Component {
     state = {
@@ -44,11 +45,12 @@ class NewQuestion extends Component {
         const { optionOneText, optionTwoText, toHome } = this.state
 
         if (toHome === true) {
-            return <Redirect to='/' />
+            return <Redirect to='/home' />
         }      
 
         return (
             <div>
+                <Nav />
                 <h3 className='center'>Compose New Question</h3> 
                 <form className='new-question' onSubmit={this.handleSubmit}>
                     Would you rather

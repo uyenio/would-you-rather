@@ -21,11 +21,13 @@ class Question extends Component {
         } = question
 
         return (
+            
             <Link to={`/questions/${id}`} className='question'>
                 <span onClick={(e) => this.goToQuestionDetails(e, this.props.id)}>
                     Would you rather {optionOne.text} or {optionTwo.text}?
                 </span>
             </Link>
+
         )
     }
 }

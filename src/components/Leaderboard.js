@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import User from './User'
+import Nav from './Nav'
 
 class Leaderboard extends Component {
     render() {
         return(
             <div>
+                <Nav />
                 <ul> 
                     {this.props.userIds.map((id) => (
                         <li key={id}>
