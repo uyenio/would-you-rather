@@ -10,17 +10,17 @@ class Nav extends Component {
                 <nav className='nav'>
                     <ul>
                         <li>
-                            <NavLink to='/home' exact activeClassName='active'>
+                            <NavLink to='/app/home' exact activeClassName='active'>
                                 Home
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/add' exact activeClassName='active'>
+                            <NavLink to='/app/add' exact activeClassName='active'>
                                 New Question
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to='/leaderboard' exact activeClassName='active'>
+                            <NavLink to='/app/leaderboard' exact activeClassName='active'>
                                 Leaderboard
                             </NavLink>
                         </li>

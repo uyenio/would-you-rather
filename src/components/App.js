@@ -35,10 +35,10 @@ class App extends Component {
                 ? null
                 : <div>
                     <Route path="/login" component={Login}/>
-                    <Route path='/home' component={Home}/>
-                    <Route path='/questions/:id' component={QuestionDetails}/>
-                    <Route path='/add' component={NewQuestion} />
-                    <Route path='/leaderboard' component={Leaderboard} />
+                    <Route path='/app/home' component={Home}/>
+                    <Route path='/app/questions/:id' component={QuestionDetails}/>
+                    <Route path='/app/add' component={NewQuestion} />
+                    <Route path='/app/leaderboard' component={Leaderboard} />
                     <Redirect from="/" to="/login"/>
                   </div>
               }

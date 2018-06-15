@@ -56,7 +56,7 @@ export default class Login extends React.Component {
          * We have appToken relevant for our backend API
          */
         if (localStorage.getItem(appTokenKey)) {
-            this.props.history.push("/home");
+            this.props.history.push("/app/home");
             return;
         }
 
@@ -72,14 +72,14 @@ export default class Login extends React.Component {
                 localStorage.setItem(appTokenKey, user.uid);
 
                 // store the token
-                this.props.history.push("/home")
+                this.props.history.push("/app/home")
             }
         });
     }
 
     render() {
         console.log(firebaseAuthKey + "=" + localStorage.getItem(firebaseAuthKey));
-        //if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen />;
+        if (localStorage.getItem(firebaseAuthKey) === "1") return <SplashScreen />;
         return <LoginPage handleGoogleLogin={this.handleGoogleLogin}/>;
     }
 }
