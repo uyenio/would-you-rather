@@ -205,3 +205,31 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
     }, 500)
   })
 }
+
+function formatUser ({ uid, displayName, photoURL}) {
+  console.log('formatted user :' + uid + ' ' + displayName + ' ' + photoURL);
+  return {
+    id: uid,
+    name: displayName,
+    avatarURL: photoURL,
+    answers: {},
+    questions: []
+  }
+}
+
+export function _saveUser (user) {
+  return new Promise((res, rej) => {
+    const authedUser = user.uid;
+    const formattedUser = formatUser(user);
+
+    setTimeout(() => {
+      users = {
+        ...users,
+        [formattedUser.id]: formattedUser
+      }
+      
+      res(formattedUser)
+    }, 1000)
+  })
+}
+

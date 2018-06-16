@@ -2,11 +2,14 @@ import React from "react";
 import {FontIcon, RaisedButton} from "material-ui";
 import {loginWithGoogle} from "../utils/auth";
 import {firebaseAuth} from "../config/constants";
+import { setAuthedUser } from "../actions/authedUser";
+import { handleAddUser } from '../actions/users'
+import { connect } from 'react-redux'
 
 const firebaseAuthKey = "firebaseAuthInProgress";
 const appTokenKey = "appToken";
 
-export default class Login extends React.Component {
+class Login extends React.Component {
 
     constructor(props) {
         super(props);
@@ -52,9 +55,7 @@ export default class Login extends React.Component {
          })*/
         ;
 
-        /**
-         * We have appToken relevant for our backend API
-         */
+   
         if (localStorage.getItem(appTokenKey)) {
             this.props.history.push("/app/home");
             return;
@@ -62,16 +63,15 @@ export default class Login extends React.Component {
 
         firebaseAuth().onAuthStateChanged(user => {
             if (user) {
+                const { dispatch } = this.props
+
+                console.log(user.uid, user.displayName, user.ph);
+                dispatch(handleAddUser(user))
+
                 console.log("User signed in: ", JSON.stringify(user));
 
                 localStorage.removeItem(firebaseAuthKey);
-
-                // here you could authenticate with you web server to get the
-                // application specific token so that you do not have to
-                // authenticate with firebase every time a user logs in
                 localStorage.setItem(appTokenKey, user.uid);
-
-                // store the token
                 this.props.history.push("/app/home")
             }
         });
@@ -83,6 +83,8 @@ export default class Login extends React.Component {
         return <LoginPage handleGoogleLogin={this.handleGoogleLogin}/>;
     }
 }
+
+export default connect()(Login)
 
 const iconStyles = {
     color: "#ffffff"
