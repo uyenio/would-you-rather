@@ -1,5 +1,4 @@
 import React from "react";
-import {FontIcon, RaisedButton} from "material-ui";
 import {loginWithGoogle} from "../utils/auth";
 import {firebaseAuth} from "../config/constants";
 import { setAuthedUser } from "../actions/authedUser";
@@ -23,39 +22,13 @@ class Login extends React.Component {
     handleGoogleLogin() {
         loginWithGoogle()
             .catch(function (error) {
-                alert(error); // or show toast
+                alert(error);
                 localStorage.removeItem(firebaseAuthKey);
             });
         localStorage.setItem(firebaseAuthKey, "1");
     }
 
     componentWillMount() {
-        /*         firebaseAuth().getRedirectResult().then(function(result) {
-         if (result.user) {
-         console.log("GoogleLogin Redirect result");
-         if (result.credential) {
-         // This gives you a Google Access Token. You can use it to access the Google API.
-         let token = result.credential.accessToken;
-         // ...
-         }
-         // The signed-in user info.
-         let user = result.user;
-         console.log("user:", JSON.stringify(user));
-         }
-         }).catch(function(error) {
-         // Handle Errors here.
-         var errorCode = error.code;
-         var errorMessage = error.message;
-         // The email of the user's account used.
-         var email = error.email;
-         // The firebase.auth.AuthCredential type that was used.
-         var credential = error.credential;
-         // ...
-         alert(error);
-         })*/
-        ;
-
-   
         if (localStorage.getItem(appTokenKey)) {
             this.props.history.push("/app/home");
             return;
@@ -64,12 +37,7 @@ class Login extends React.Component {
         firebaseAuth().onAuthStateChanged(user => {
             if (user) {
                 const { dispatch } = this.props
-
-                console.log(user.uid, user.displayName, user.ph);
-                dispatch(handleAddUser(user))
-
-                console.log("User signed in: ", JSON.stringify(user));
-
+                dispatch(handleAddUser(user));
                 localStorage.removeItem(firebaseAuthKey);
                 localStorage.setItem(appTokenKey, user.uid);
                 this.props.history.push("/app/home")
@@ -89,18 +57,11 @@ export default connect()(Login)
 const iconStyles = {
     color: "#ffffff"
 };
+
 const LoginPage = ({handleGoogleLogin}) => (
     <div>
         <h1>Login</h1>
         <div>
-            {/* <RaisedButton
-                label="Sign in with Google"
-                labelColor={"#ffffff"}
-                backgroundColor="#dd4b39"
-                icon={<FontIcon className="fa fa-google-plus" style={iconStyles}/>}
-                onClick={handleGoogleLogin}
-            /> */}
-
             <button onClick={handleGoogleLogin}>
                 Sign in with Google
             </button>
@@ -108,4 +69,5 @@ const LoginPage = ({handleGoogleLogin}) => (
         </div>
     </div>
 );
+
 const SplashScreen = () => (<p>Loading...</p>)

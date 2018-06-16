@@ -3,8 +3,6 @@ import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
 
 class Nav extends Component {
-
-
     render() {
         return (
                 <nav className='nav'>
@@ -37,6 +35,5 @@ function mapStateToProps ({users, authedUser}) {
         userName: userName
     }
 }
-
 
 export default connect(mapStateToProps)(Nav)

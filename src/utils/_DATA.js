@@ -207,7 +207,6 @@ export function _saveQuestionAnswer ({ authedUser, qid, answer }) {
 }
 
 function formatUser ({ uid, displayName, photoURL}) {
-  console.log('formatted user :' + uid + ' ' + displayName + ' ' + photoURL);
   return {
     id: uid,
     name: displayName,
@@ -227,7 +226,7 @@ export function _saveUser (user) {
         ...users,
         [formattedUser.id]: formattedUser
       }
-      
+
       res(formattedUser)
     }, 1000)
   })

@@ -6,27 +6,18 @@ import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Nav from './Nav'
 import { logout } from "../utils/auth";
 
-const appTokenKey = "appToken"; // also duplicated in Login.js
-
+const appTokenKey = "appToken";
 
 class Home extends Component {
     constructor(props) {
         super(props);
-    
-        this.state = {
-            //firebaseUser: JSON.parse(localStorage.getItem("firebaseUser"))
-        };
-    
-        //console.log("User:", this.state.firebaseUser);
         this.handleLogout = this.handleLogout.bind(this);
     }
     
     handleLogout() {
-        console.log('handle logout');
         logout().then(function () {
             localStorage.removeItem(appTokenKey);
             this.props.history.push("/login");
-            console.log("user signed out from firebase");
         }.bind(this));
     
     }
