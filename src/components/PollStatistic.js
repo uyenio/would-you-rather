@@ -2,10 +2,12 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { formatQuestion } from '../utils/helpers'
 import Nav from './Nav'
+import TiTickOutline from 'react-icons/lib/ti/tick-outline'
+import TiTick from 'react-icons/lib/ti/tick'
 
 class PollStatistic extends Component {
     render() {
-        const { question } = this.props
+        const { question, userSelectedOption } = this.props
         if (question === null) {
             return <p> This question doesn't exist</p>
         }
@@ -15,18 +17,29 @@ class PollStatistic extends Component {
         } = question
 
         var totalVotes = optionOne.votes.length + optionTwo.votes.length
+
+        console.log(userSelectedOption)
         return (
             <div>
                 <Nav />
                 <div>
                     Would you rather 
                     <div>
+                    {userSelectedOption === 'optionOne' 
+                                ? <TiTick color='#0xe11e' className='question-icon'/>
+                                : <TiTickOutline className='question-icon' />
+                            }
+
                         {optionOne.text}
                         - Votes: {optionOne.votes.length}
                         - Percentage: {Math.round((optionOne.votes.length / totalVotes) * 100)}%
                     </div>         
                         or
                     <div>
+                    {userSelectedOption === 'optionTwo' 
+                                ? <TiTick color='#0xe11e' className='question-icon'/>
+                                : <TiTickOutline className='question-icon' />
+                            }
                         {optionTwo.text} 
                         - Votes: {optionTwo.votes.length}
                         - Percentage: {Math.round((optionTwo.votes.length / totalVotes) * 100)}%
@@ -37,11 +50,13 @@ class PollStatistic extends Component {
     }
 }
 
-function mapStateToProps({authedUser, questions}, {id}) {
+function mapStateToProps({authedUser, questions, users}, {id}) {
     const question = questions[id]
-
+    const user = users[authedUser]
+    const userSelectedOption = user.answers[question.id]
+ 
     return {
-        authedUser,
+        userSelectedOption,
         question: formatQuestion(question, authedUser)
     }
 }
