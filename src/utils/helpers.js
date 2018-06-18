@@ -5,6 +5,10 @@ export function formatDate (timestamp) {
 }
 
 export function formatQuestion (question, authedUser) {
+  if (question === undefined) {
+    return null
+  } 
+  
   const { timestamp, optionOne, optionTwo, id, author } = question
 
   return {
