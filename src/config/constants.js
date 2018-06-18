@@ -1,13 +1,10 @@
-import firebase from 'firebase'
+export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS'
+export const ADD_QUESTION = 'ADD_QUESTION'
+export const ADD_VOTE = 'ADD_VOTE'
 
-const config = {
-    apiKey: "AIzaSyCJG4S0rosvyIvi0EHapxt_x_rCvL4ctk8",
-    authDomain: "wouldyourather-4acb6.firebaseapp.com",
-    databaseURL: "https://wouldyourather-4acb6.firebaseio.com",
-};
+export const SET_AUTHED_USER = 'SET_AUTHED_USER'
 
-firebase.initializeApp(config);
+export const AUTHED_ID = 'tylermcginnis'
 
-export const googleProvider = new firebase.auth.GoogleAuthProvider();
-export const ref = firebase.database().ref();
-export const firebaseAuth = firebase.auth;
+export const RECEIVE_USERS = 'RECEIVE_USERS'
+export const SAVE_USER_ANSWER = 'SAVE_USER_ANSWER'

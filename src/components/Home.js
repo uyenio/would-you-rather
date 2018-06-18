@@ -2,11 +2,9 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Question from './Question'
 import QuestionDetails from './QuestionDetails'
+import { setAuthedUser } from "../actions/authedUser";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import Nav from './Nav'
-import { logout } from "../utils/auth";
-
-const appTokenKey = "appToken";
 
 class Home extends Component {
     constructor(props) {
@@ -15,11 +13,9 @@ class Home extends Component {
     }
     
     handleLogout() {
-        logout().then(function () {
-            localStorage.removeItem(appTokenKey);
-            this.props.history.push("/login");
-        }.bind(this));
-    
+        const { dispatch } = this.props
+        dispatch(setAuthedUser(null))
+        this.props.history.push("/");
     }
 
     render() {

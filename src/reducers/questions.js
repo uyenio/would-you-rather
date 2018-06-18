@@ -1,4 +1,4 @@
-import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_VOTE} from '../actions/questions'
+import { RECEIVE_QUESTIONS, ADD_QUESTION, ADD_VOTE} from '../config/constants'
 
 export default function questions (state = {}, action) {
     switch(action.type) {

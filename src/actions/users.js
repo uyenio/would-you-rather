@@ -1,9 +1,7 @@
 import { saveQuestionAnswer, saveUser } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { setAuthedUser } from '../actions/authedUser'
-export const RECEIVE_USERS = 'RECEIVE_USERS'
-export const SAVE_USER_ANSWER = 'SAVE_USER_ANSWER'
-export const ADD_USER = 'ADD_USER'
+import { SAVE_USER_ANSWER, RECEIVE_USERS } from "../config/constants";
 
 export function saveUserAnswer (info) {
     return {
@@ -18,28 +16,5 @@ export function receiveUsers(users) {
     return {
         type: RECEIVE_USERS,
         users,
-    }
-}
-
-export function addUser(user) {
-    return {
-        type: ADD_USER,
-        user,
-    }
-}
-
-export function handleAddUser (user) {
-    return (dispatch, getState) => {
-        const { authedUser } = getState()
-
-        dispatch(showLoading())
-
-        return saveUser(user)
-            .then((user) => {
-                dispatch(addUser(user))
-                dispatch(setAuthedUser(user.id))
-                dispatch(hideLoading())
-            })
-
     }
 }

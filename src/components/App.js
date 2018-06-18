@@ -9,8 +9,6 @@ import Nav from './Nav'
 import QuestionDetails from './QuestionDetails'
 import Leaderboard from './Leaderboard'
 import Login from './Login'
-import getMuiTheme from "material-ui/styles/getMuiTheme";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 
 class App extends Component {
   componentDidMount() {
@@ -18,34 +16,24 @@ class App extends Component {
   }
 
   render() {
-    const muiTheme = getMuiTheme({
-      appBar: {
-          color: "#37517E",
-          height: 50
-      },
-    });
-
     return (
-      <MuiThemeProvider muiTheme={muiTheme}>
         <Router>
           <Fragment>
             <LoadingBar />
             <div className='container'>
               {this.props.loading === true 
-                ? null
+                ? <Login />
                 : <div>
                     <Route path="/login" component={Login}/>
-                    <Route path='/app/home' component={Home}/>
-                    <Route path='/app/questions/:id' component={QuestionDetails}/>
-                    <Route path='/app/add' component={NewQuestion} />
-                    <Route path='/app/leaderboard' component={Leaderboard} />
-                    <Redirect from="/" to="/login"/>
+                    <Route path='/' exact component={Home}/>
+                    <Route path='/questions/:id' component={QuestionDetails}/>
+                    <Route path='/add' component={NewQuestion} />
+                    <Route path='/leaderboard' component={Leaderboard} />
                   </div>
               }
             </div>
           </Fragment>
         </Router>
-      </MuiThemeProvider>
     )
   }
 }
