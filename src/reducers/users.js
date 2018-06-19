@@ -8,7 +8,6 @@ export default function users (state = {}, action) {
                 ...action.users
             }
         case SAVE_USER_ANSWER :
-            var qKey = action.qid;
             return {
                 ...state,
                 [action.authedUser]: {

@@ -1,6 +1,6 @@
-import { saveQuestion } from '../utils/api'
 import { showLoading, hideLoading } from 'react-redux-loading'
 import { ADD_VOTE, ADD_QUESTION, RECEIVE_QUESTIONS } from "../config/constants";
+import { saveQuestion } from '../utils/api'
 
 export  function addVote (info) {
     return {

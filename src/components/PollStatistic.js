@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion } from '../utils/helpers'
-import Nav from './Nav'
 import TiTickOutline from 'react-icons/lib/ti/tick-outline'
 import TiTick from 'react-icons/lib/ti/tick'
+import { formatQuestion } from '../utils/helpers'
+import Nav from './Nav'
 
 class PollStatistic extends Component {
     render() {
@@ -13,12 +13,11 @@ class PollStatistic extends Component {
         }
 
         const {
-            timestamp, optionOne, optionTwo, id, author
+            optionOne, optionTwo
         } = question
 
         var totalVotes = optionOne.votes.length + optionTwo.votes.length
 
-        console.log(userSelectedOption)
         return (
             <div>
                 <Nav />

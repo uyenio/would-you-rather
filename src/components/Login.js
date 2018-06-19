@@ -1,8 +1,8 @@
 import React from "react";
-import { setAuthedUser } from "../actions/authedUser";
 import { connect } from 'react-redux'
 import Select from 'react-select';
 import 'react-select/dist/react-select.css';
+import { setAuthedUser } from "../actions/authedUser";
 
 class Login extends React.Component {
     state = {

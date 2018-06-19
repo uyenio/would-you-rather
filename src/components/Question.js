@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion } from '../utils/helpers'
 import { Link, withRouter } from 'react-router-dom'
+import { formatQuestion } from '../utils/helpers'
 
 class Question extends Component {
     goToQuestionDetails = (e, id) => {
@@ -17,7 +17,7 @@ class Question extends Component {
         }
 
         const {
-            timestamp, optionOne, optionTwo, id
+            optionOne, optionTwo, id
         } = question
 
         return (

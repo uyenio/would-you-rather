@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Question from './Question'
-import QuestionDetails from './QuestionDetails'
-import { setAuthedUser } from "../actions/authedUser";
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
+import { setAuthedUser } from "../actions/authedUser";
 import Nav from './Nav'
+import Question from './Question'
 
 class Home extends Component {
     constructor(props) {
@@ -13,8 +12,7 @@ class Home extends Component {
     }
     
     handleLogout() {
-        const { dispatch } = this.props
-        dispatch(setAuthedUser(null))
+        this.props.setAuthedUser(null)
         this.props.history.push("/");
     }
 
@@ -70,4 +68,4 @@ function mapStateToProps ({questions, users, authedUser}) {
     }
 }
 
-export default connect(mapStateToProps)(Home)
+export default connect(mapStateToProps, {setAuthedUser})(Home)

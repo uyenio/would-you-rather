@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { handleAddQuestion } from '../actions/questions'
 import { Redirect } from 'react-router-dom'
+import { handleAddQuestion } from '../actions/questions'
 import Nav from './Nav'
 
 class NewQuestion extends Component {
@@ -11,20 +11,19 @@ class NewQuestion extends Component {
         toHome: false,
     }
 
-    handleOptionOneChange = (e) => {
-        const optionOneText = e.target.value
-        
-        this.setState(() => ({
-            optionOneText
-        }))
-    }
+    handleChange = (e, optionType) => {
+        const optionText = e.target.value
+        if (optionType === 'optionOne') {
+            this.setState(() => ({
+                optionOneText: optionText
+            }))
+        } 
 
-    handleOptionTwoChange = (e) => {
-        const optionTwoText = e.target.value
-        
-        this.setState(() => ({
-            optionTwoText
-        }))
+        if (optionType === 'optionTwo') {
+            this.setState(() => ({
+                optionTwoText: optionText
+            }))
+        }
     }
 
     handleSubmit = (e) => {
@@ -54,9 +53,9 @@ class NewQuestion extends Component {
                 <h3 className='center'>Compose New Question</h3> 
                 <form className='new-question' onSubmit={this.handleSubmit}>
                     Would you rather
-                    <input placeholder='Option 01' value={optionOneText} onChange={this.handleOptionOneChange}/>
+                    <input placeholder='Option 01' value={optionOneText} onChange={(e) => this.handleChange(e, 'optionOne')}/>
                     or 
-                    <input placeholder='Option 02' value={optionTwoText} onChange={this.handleOptionTwoChange}/>
+                    <input placeholder='Option 02' value={optionTwoText} onChange={(e) => this.handleChange(e, 'optionTwo')}/>
                     ?
                     <button className='btn' 
                             type='submit'

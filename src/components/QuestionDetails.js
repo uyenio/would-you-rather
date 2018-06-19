@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion } from '../utils/helpers'
 import Poll from './Poll'
 import PollStatistic from './PollStatistic'
 import PageNotFound from './PageNotFound'
+import { formatQuestion } from '../utils/helpers'
 
 class QuestionDetails extends Component {
     render() {

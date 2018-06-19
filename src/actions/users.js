@@ -1,6 +1,3 @@
-import { saveQuestionAnswer, saveUser } from '../utils/api'
-import { showLoading, hideLoading } from 'react-redux-loading'
-import { setAuthedUser } from '../actions/authedUser'
 import { SAVE_USER_ANSWER, RECEIVE_USERS } from "../config/constants";
 
 export function saveUserAnswer (info) {

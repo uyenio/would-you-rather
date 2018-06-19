@@ -5,7 +5,6 @@ import LoadingBar from 'react-redux-loading'
 import { handleInitialData } from '../actions/shared'
 import Home from './Home'
 import NewQuestion from './NewQuestion'
-import Nav from './Nav'
 import QuestionDetails from './QuestionDetails'
 import Leaderboard from './Leaderboard'
 import Login from './Login'
@@ -24,7 +23,7 @@ class App extends Component {
             <div className='container'>
               {this.props.loading === true 
                 ? <Login />
-                : <div>
+                : 
                     <Switch>
                       <Route path="/login" component={Login}/>
                       <Route path='/' exact component={Home}/>
@@ -32,8 +31,7 @@ class App extends Component {
                       <Route path='/add' component={NewQuestion} />
                       <Route path='/leaderboard' component={Leaderboard} />
                       <Route component={PageNotFound} />
-                    </Switch>
-                  </div>
+                    </Switch>         
               }
             </div>
           </Fragment>

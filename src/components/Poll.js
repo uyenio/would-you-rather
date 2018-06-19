@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { formatQuestion, formatDate } from '../utils/helpers'
 import TiTickOutline from 'react-icons/lib/ti/tick-outline'
 import TiTick from 'react-icons/lib/ti/tick'
-import User from './User'
 import { handleVote } from '../actions/shared'
-import PollStatistic from './PollStatistic';
+import { formatQuestion } from '../utils/helpers'
 import Nav from './Nav'
+import User from './User'
 
 class Poll extends Component {
     state = {
@@ -14,36 +13,21 @@ class Poll extends Component {
        isOptionTwoSelected: false
     }
 
-    handleOptionOneVote = (e) => {
+    handleVote = (e, optionType) => {
         e.preventDefault();
+
         this.setState(() => ({
-            isOptionTwoSelected: false,
-            isOptionOneSelected: true
+            isOptionOneSelected: (optionType === 'optionOne'),
+            isOptionTwoSelected: (optionType === 'optionTwo')
           }))
 
-        const { dispatch, question, authedUser } = this.props;
+        const { question, authedUser } = this.props;
 
-        dispatch(handleVote({
+        this.props.handleVote({
             authedUser,
             qid: question.id,
-            answer: 'optionOne'
-        }));
-    }
-
-    handleOptionTwoVote = (e) => {
-        e.preventDefault();
-        this.setState(() => ({
-            isOptionTwoSelected: true,
-            isOptionOneSelected: false
-          }))
-
-        const { dispatch, question, authedUser } = this.props;
-
-        dispatch(handleVote({
-            authedUser,
-            qid: question.id,
-            answer: 'optionTwo'
-        }));
+            answer: optionType
+        });
     }
 
     render() {
@@ -55,7 +39,7 @@ class Poll extends Component {
         }
 
         const {
-            timestamp, optionOne, optionTwo, id, author
+            optionOne, optionTwo, author
         } = question
 
         return (
@@ -65,7 +49,7 @@ class Poll extends Component {
                     <User id={author}/>
                     Would you rather 
                     <div className='question-info'>
-                        <button className='tick-button' onClick={this.handleOptionOneVote}>
+                        <button className='tick-button' onClick={(e) => this.handleVote(e, 'optionOne')}>
                             {isOptionOneSelected === true 
                                 ? <TiTick color='#0xe11e' className='question-icon'/>
                                 : <TiTickOutline className='question-icon' />
@@ -73,7 +57,7 @@ class Poll extends Component {
                             {optionOne.text}
                         </button>
                         or
-                        <button className='tick-button' onClick={this.handleOptionTwoVote}>
+                        <button className='tick-button' onClick={(e) => this.handleVote(e, 'optionTwo')}>
                             {isOptionTwoSelected === true 
                                 ? <TiTick color='#0xe11e' className='question-icon'/>
                                 : <TiTickOutline className='question-icon' />
@@ -96,5 +80,5 @@ function mapStateToProps({authedUser, questions}, {id}) {
     }
 }
 
-export default connect(mapStateToProps)(Poll)
+export default connect(mapStateToProps, {handleVote})(Poll)
 
